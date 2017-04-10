@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cloneterest</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">	
+
+	<link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="/css/custom.css">
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
+
+	<script src="/js/photoGrid.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid inner-content-nav">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Cloneterest</a>
+			</div>
+
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<% if(loggedIn) { %>
+					<li><a href="/mypics">My Photos</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">New Photo<span class="caret"></span></a>
+							<div class="dropdown-menu">
+								<form method="POST" action="/mypics/new">
+									<div class="form-group">
+										<input class="form-control" type="text" name="url" maxlength="100" placeholder="Photo URL">	
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="text" name="description" maxlength="100" placeholder="Photo Description" />	
+									</div>
+
+									<button class="btn btn-success" type="submit">Submit</button>
+								</form>
+							</div>
+					</li>
+				<% } %>
+
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<%- symbol %>
+				<% if(loggedIn) { %>
+					<strong><a href="/logout">Logout</a></strong>
+				<% } %>
+			</ul>
+		</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-1 col-sm-2 col-xs-0"></div>
+			<div class="col-md-10 col-sm-8 col-xs-12">
+				<div class="grid">
+					<div class="grid-sizer"></div>
+
+					<% photos.forEach(function(photo) { %>
+
+					<div class="grid-item">
+						<div class="thumbnail img-holder">
+							<img src="<%= photo.url %>" alt="<%= photo.description %>" class="img-responsive" onerror="this.src='https://cdn.hyperdev.com/us-east-1%3A60e6615e-7d9e-47ac-903b-3b4b47372e42%2Fplaceholder.png'">
+							<div class="caption">
+								<p class="description">
+									<%= photo.description %>
+								</p>
+								<small class="user-name"><a href="https://twitter.com/<%= photo.userName %>" target="_blank">Delete</a></small>
+							</div>
+
+						</div>
+						
+						
+					</div>
+					<% }) %>
+				</div>
+			</div>
+			<div class="col-md-1 col-sm-2 col-xs-0"></div>
+		</div>
+		<br>
+	</div>	
+	
+
+</body>
+</html>
