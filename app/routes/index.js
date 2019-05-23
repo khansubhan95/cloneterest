@@ -20,6 +20,19 @@ module.exports = function(app, passport) {
 
 		})
 	})
+
+	app.get('/pics/:id', function(req, res) {
+		var id = req.params.id
+		Photo.findOne({_id: id}, function(err, doc) {
+			if (err) console.log(err);
+
+			if(req.isAuthenticated()) {
+				res.render('pic', {symbol: twitterProfileImage(req.user.twitter.profilePicture), loggedIn: true, photo: doc})
+			}
+			var symbol = '<li class="twitter"><a href="/login" class="btn btn-block btn-social btn-twitter btn-lg"><i class="fa fa-twitter"></i>Sign in with Twitter</a></li>'
+			res.render('pic', {symbol: symbol, loggedIn: false, photo: doc})
+		})
+	})
 	
 	app.get('/mypics', isLoggedIn, function(req, res) {
 		Photo.find({'userId': req.user.twitter.id}, function(err, doc) {

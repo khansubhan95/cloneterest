@@ -76,15 +76,12 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-1 col-sm-2 col-xs-0"></div>
-			<div class="col-md-10 col-sm-8 col-xs-12">
+			<div class="col-md-2 col-sm-4 col-xs-0"></div>
+			<div class="col-md-8 col-sm-4 col-xs-12">
 				<div class="grid">
 					<div class="grid-sizer"></div>
 
-					<% photos.forEach(function(photo) { %>
-
-					<div class="grid-item">
-						<a href="/pics/<%= photo._id %>">
+					<div class="grid-item-single">
 						<div class="thumbnail img-holder">
 							<img src="<%= photo.url %>" alt="<%= photo.description %>" class="img-responsive" onerror="this.src='https://cdn.hyperdev.com/us-east-1%3A60e6615e-7d9e-47ac-903b-3b4b47372e42%2Fplaceholder.png'">
 							<div class="caption">
@@ -94,14 +91,12 @@
 							</div>
 
 						</div>
-						</a>
 						
 						
 					</div>
-					<% }) %>
 				</div>
 			</div>
-			<div class="col-md-1 col-sm-2 col-xs-0"></div>
+			<div class="col-md-2 col-sm-4 col-xs-0"></div>
 		</div>
 		<br>
 	</div>	

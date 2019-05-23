@@ -80,6 +80,7 @@
 					<% photos.forEach(function(photo) { %>
 
 					<div class="grid-item">
+						<a href="/pics/<%= photo._id %>">
 						<div class="thumbnail img-holder">
 							<img src="<%= photo.url %>" alt="<%= photo.description %>" class="img-responsive" onerror="this.src='https://cdn.hyperdev.com/us-east-1%3A60e6615e-7d9e-47ac-903b-3b4b47372e42%2Fplaceholder.png'">
 							<div class="caption">
@@ -91,7 +92,7 @@
 
 						</div>
 						
-						
+					</a>	
 					</div>
 					<% }) %>
 				</div>

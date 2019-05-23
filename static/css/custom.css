@@ -123,6 +123,16 @@ img
     max-width: 100%;
 }
 
+.grid-item-single
+{
+    display: block;
+    width: 100%;
+}
+
+.grid-item-single img {
+    display: block;
+}
+
 @media (max-width: 979px)
 {
     body
