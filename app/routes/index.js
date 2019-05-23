@@ -13,7 +13,7 @@ module.exports = function(app, passport) {
 			if (err) console.log(err);
 
 			if(req.isAuthenticated()) {
-				res.render('list', {symbol: twitterProfileImage(req.user.twitter.userName), loggedIn: true, photos: doc})
+				res.render('list', {symbol: twitterProfileImage(req.user.twitter.profilePicture), loggedIn: true, photos: doc})
 			}
 			var symbol = '<li class="twitter"><a href="/login" class="btn btn-block btn-social btn-twitter btn-lg"><i class="fa fa-twitter"></i>Sign in with Twitter</a></li>'
 			res.render('list', {symbol: symbol, loggedIn: false, photos: doc})
@@ -25,7 +25,7 @@ module.exports = function(app, passport) {
 		Photo.find({'userId': req.user.twitter.id}, function(err, doc) {
 			if (err) console.log(err);
 
-			res.render('mypics', {symbol: twitterProfileImage(req.user.twitter.userName), loggedIn: true, photos: doc})
+			res.render('mypics', {symbol: twitterProfileImage(req.user.twitter.profilePicture), loggedIn: true, photos: doc})
 		})
 	})
 
@@ -52,7 +52,7 @@ module.exports = function(app, passport) {
 	})
 
 	app.get('/mypics/new', isLoggedIn, function(req, res) {
-		res.render('new', {symbol: twitterProfileImage(req.user.twitter.userName)})
+		res.render('new', {symbol: twitterProfileImage(req.user.twitter.profilePicture)})
 	})
 
 	app.post('/mypics/new', isLoggedIn, urlencodedParser, function(req, res) {
@@ -127,8 +127,7 @@ function isNotLoggedIn (req, res, next) {
  * @param  {string} userName twitter username
  * @return {html string}          An html element string representing the twitter user profile image
  */
-function twitterProfileImage(userName) {
-	var picUrl = 'https://twitter.com/' + userName + '/profile_image?size=normal'
-	var pic = '<img src="' + picUrl + '" alt="' + userName + '" />'
+function twitterProfileImage(picUrl) {
+	var pic = '<img src="' + picUrl + '" />'
 	return pic
 }

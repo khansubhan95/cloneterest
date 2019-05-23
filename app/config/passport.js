@@ -34,6 +34,7 @@ module.exports = function(passport) {
 					newUser.twitter.id = profile.id
 					newUser.twitter.userName = profile.username
 					newUser.twitter.displayName = profile.displayName
+					newUser.twitter.profilePicture = profile.photos[0].value
 
 					newUser.save(function(err) {
 						if (err) console.log(err);
